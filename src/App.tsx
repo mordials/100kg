@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Dumbbell,
   Target,
-  Calendar,
   User,
   Zap,
   AlertTriangle,
@@ -13,13 +12,15 @@ import {
 } from 'lucide-react';
 
 export default function App() {
-  const [checklist, setChecklist] = useState({});
+  // Corregido: Le explicamos a TypeScript que esto es un objeto con llaves de texto y valores de sí/no
+  const [checklist, setChecklist] = useState<Record<string, boolean>>({});
 
-  const toggleCheck = (id) => {
+  // Corregido: Le definimos a 'id' que es un texto (string)
+  const toggleCheck = (id: string) => {
     setChecklist((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const InputCell = ({ placeholder }) => (
+  const InputCell = ({ placeholder }: { placeholder: string }) => (
     <td className="p-2 border-b border-slate-800">
       <input
         type="text"
@@ -145,7 +146,7 @@ export default function App() {
               <tbody>
                 <tr className="bg-slate-800/80">
                   <td
-                    colSpan="7"
+                    colSpan={7}
                     className="p-2 px-4 text-xs font-bold text-cyan-500 uppercase tracking-widest border-y border-cyan-900/30"
                   >
                     Bloque 1: Construcción
@@ -170,7 +171,7 @@ export default function App() {
 
                 <tr className="bg-amber-900/20">
                   <td
-                    colSpan="7"
+                    colSpan={7}
                     className="p-2 px-4 text-xs font-bold text-amber-500 uppercase tracking-widest border-y border-amber-900/30"
                   >
                     Semana 9: Descarga
@@ -202,7 +203,7 @@ export default function App() {
 
                 <tr className="bg-slate-800/80">
                   <td
-                    colSpan="7"
+                    colSpan={7}
                     className="p-2 px-4 text-xs font-bold text-blue-400 uppercase tracking-widest border-y border-blue-900/30"
                   >
                     Bloque 2: Intensificación al 1RM
@@ -301,7 +302,7 @@ export default function App() {
                       <InputCell placeholder="DD/MM" />
                       {sem === 9 ? (
                         <td
-                          colSpan="2"
+                          colSpan={2}
                           className="p-2 text-amber-500/80 text-sm text-center tracking-widest uppercase font-bold"
                         >
                           Deload
@@ -374,7 +375,7 @@ export default function App() {
                           item.gold ? 'text-amber-400' : 'text-cyan-400'
                         }
                         size={20}
-                      />
+                  />
                     ) : (
                       <Circle className="text-slate-600" size={20} />
                     )}
